@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using AlgorithmsOnGraphsClass;
+
+namespace AlgorithmsOnGraphsClass
+{
+    public class AlgorithmsOnGraphs
+    {
+        private
+               Graph graph;
+        int ver;
+        int G, N;
+        public AlgorithmsOnGraphs(RichTextBox box)
+        {
+            graph = new Graph(box);
+            ver = graph.CountOfVertex();
+        }
+
+        public bool CheckingForCorrectness()
+        {
+            return graph.checkCorrectlyMatrix;
+        }
+
+
+        private bool CheckLoop()
+        {
+            bool check = new bool();
+            for (int i = 0; i < graph.CountOfVertex(); i++)
+                if (graph.ExistEdge(i, i)) check = true;
+            return check;
+        }
+
+        public bool CheckUndirected()
+        {
+            for (int i = 0; i < graph.CountOfVertex(); i++)
+                for (int j = 0; j < graph.CountOfVertex(); j++)
+                    if (graph.ExistEdge(i, j))
+                        if (!graph.ExistEdge(j, i)) return false;
+            return true;
+        }
+        void Ras(int k)
+        {
+            for (int c = 1; c <= k; c++)
+            {
+                for (int i = 0; i < N; i++)
+                {
+                    for (int j = i + 1; j < N; j++)
+                    {
+                        if (G[i][j] == 1)
+                        {
+                            if ((Ver[i] == 0) && (Prov1(i, c) == 1))
+                            {
+                                Ver[i] = c;
+                            }
+                            if ((Ver[j] == 0) && (Prov1(j, c) == 1))
+                            {
+                                Ver[j] = c;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
